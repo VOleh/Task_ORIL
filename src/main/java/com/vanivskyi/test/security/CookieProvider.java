@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class CookieProvider {
     public final static String KEY_VALUE_FOR_COOKIE = "test_app_jwt";
-    private final int EXPIRED_TIME_FOR_COOKIE = 1000000;
+    public  final static int EXPIRED_TIME_FOR_COOKIE = 1000000;
 
     public Cookie createCookie(String token) {
         Cookie cookie = new Cookie(KEY_VALUE_FOR_COOKIE, token);

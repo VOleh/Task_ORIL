@@ -19,9 +19,9 @@ import java.io.IOException;
 import static java.text.MessageFormat.format;
 
 public class JWTTokenFilter extends GenericFilterBean {
+    private JWTTokenProvider jwtTokenProvider;
 
     Logger logger = LoggerFactory.getLogger(JWTTokenFilter.class);
-    private JWTTokenProvider jwtTokenProvider;
 
     @Autowired
     public JWTTokenFilter(JWTTokenProvider jwtTokenProvider) {
