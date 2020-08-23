@@ -25,20 +25,21 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.Cookie;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.text.MessageFormat.format;
+import static java.util.Optional.ofNullable;
 
 @Service
 public class UserServiceImpl implements UserService {
+    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     private UserRepository userRepository;
     private UserCreateMapper userCreateMapper;
     private UserReadMapper userReadMapper;
     private PasswordEncoder passwordEncoder;
     private CookieProvider cookieProvider;
     private JWTTokenProvider jwtTokenProvider;
-
-    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, UserCreateMapper userCreateMapper,
@@ -91,9 +92,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserReadDTO getUser(String email) {
-        return userRepository.findById(email).map(val -> userReadMapper.toDTO(val))
-                .orElseThrow(() ->
-                        new UserNotFoundException(format("User with {0} not found", email.toUpperCase())));
+        Optional<User> user = ofNullable(userRepository.findById(email)).orElseThrow(() ->
+                new UserNotFoundException(format("User with {0} not found", email.toUpperCase())));
+
+        return userReadMapper.toDTO(user.get());
     }
 
     @Override

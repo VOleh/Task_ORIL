@@ -47,8 +47,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/logout")
-    public HttpStatus getLogout(HttpServletResponse response) {
+    public void getLogout(HttpServletResponse response) {
         response.addCookie(cookieProvider.deleteCookie());
-        return HttpStatus.OK;
     }
 }
