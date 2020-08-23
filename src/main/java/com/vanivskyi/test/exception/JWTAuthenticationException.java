@@ -1,4 +1,4 @@
-package com.vanivskyi.test.security.exception;
+package com.vanivskyi.test.exception;
 
 public class JWTAuthenticationException extends RuntimeException {
     public JWTAuthenticationException(String message) {

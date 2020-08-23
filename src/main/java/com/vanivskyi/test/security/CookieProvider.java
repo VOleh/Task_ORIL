@@ -19,6 +19,9 @@ public class CookieProvider {
 
 
     public String readCookie(HttpServletRequest request) {
+        if (request == null) {
+            return null;
+        }
         Cookie[] cookies = request.getCookies();
         String token = null;
         if (cookies != null) {

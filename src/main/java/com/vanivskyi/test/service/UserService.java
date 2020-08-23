@@ -3,8 +3,10 @@ package com.vanivskyi.test.service;
 import com.vanivskyi.test.dto.AuthenticationRequestDTO;
 import com.vanivskyi.test.dto.UserCreateDTO;
 import com.vanivskyi.test.dto.UserReadDTO;
+import com.vanivskyi.test.dto.UserUpdateDTO;
 import com.vanivskyi.test.model.User;
 
+import javax.servlet.http.Cookie;
 import java.util.List;
 
 public interface UserService {
@@ -13,7 +15,7 @@ public interface UserService {
 
     UserReadDTO getUser(String email);
 
-    UserReadDTO updateUser(String name, String lastName, String password);
+    UserReadDTO updateUser(UserUpdateDTO userDTO);
 
     String deleteUser(String email);
 
@@ -21,9 +23,11 @@ public interface UserService {
 
     boolean existsUserByEmail(String email);
 
-    boolean comparePasswordLogin(AuthenticationRequestDTO requestDto);
+    boolean comparePassword(AuthenticationRequestDTO requestDto);
 
     void validateRegistrationRequest(UserCreateDTO userCreateDTO);
+
+    Cookie getLogin(AuthenticationRequestDTO requestDTO);
 
     User getCurrentUser();
 }
