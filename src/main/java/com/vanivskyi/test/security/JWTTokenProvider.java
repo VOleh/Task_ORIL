@@ -1,10 +1,12 @@
 package com.vanivskyi.test.security;
 
 import com.vanivskyi.test.model.User;
-import com.vanivskyi.test.security.exception.JWTAuthenticationException;
+import com.vanivskyi.test.exception.JWTAuthenticationException;
 import io.jsonwebtoken.*;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,14 +18,14 @@ import java.util.Date;
 @NoArgsConstructor
 @Component
 public class JWTTokenProvider {
-    private String SECRET_KEY = CookieProvider.KEY_VALUE_FOR_COOKIE;
-    private long EXPIRED_TIME_ACCESS_TOKEN = 50000;
+    private final String SECRET_KEY = CookieProvider.KEY_VALUE_FOR_COOKIE;
+    private  final long EXPIRED_TIME_ACCESS_TOKEN = 90000000;
 
     private JWTUserDetailsService userDetailsService;
     private CookieProvider cookieProvider;
 
     @Autowired
-    public JWTTokenProvider(JWTUserDetailsService userDetailsService, CookieProvider cookieProvider) {
+    public JWTTokenProvider(@Lazy JWTUserDetailsService userDetailsService, CookieProvider cookieProvider) {
         this.userDetailsService = userDetailsService;
         this.cookieProvider = cookieProvider;
     }

@@ -2,7 +2,7 @@ package com.vanivskyi.test.security;
 
 import com.vanivskyi.test.dto.mapper.UserReadMapper;
 import com.vanivskyi.test.model.User;
-import com.vanivskyi.test.security.exception.JWTAuthenticationException;
+import com.vanivskyi.test.exception.JWTAuthenticationException;
 import com.vanivskyi.test.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
